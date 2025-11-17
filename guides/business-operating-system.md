@@ -153,12 +153,234 @@ Your technical infrastructure foundation determines scalability, security, and o
 
 #### GitHub
 - **Status**: **Recommended**
-- **Components**: Source control, CI/CD (Actions), project management, code review
+- **Free Tier**: Unlimited public and private repos, unlimited collaborators, 2,000 CI/CD minutes/month, 500MB package storage
+- **Components**: Source control, CI/CD (Actions), project management, code review, security scanning
 - **Key Features**:
   - Industry-standard Git platform
-  - Advanced security features
-  - Large ecosystem of integrations
-  - GitHub Actions for automation
+  - GitHub Actions for CI/CD automation (free tier sufficient for most startups)
+  - Advanced security features (Dependabot, secret scanning, code scanning)
+  - Project management (Issues, Projects, Milestones)
+  - GitHub Packages (container registry, npm, etc.)
+  - GitHub Pages (free static site hosting)
+  - Codespaces (cloud dev environments)
+  - Large ecosystem of integrations (10,000+ apps)
+- **Upgrade Path**:
+  - **Team**: $4/user/month (3,000 minutes, advanced security)
+  - **Enterprise**: Custom pricing (SAML SSO, audit logs)
+- **Recommendation**: **Essential** - Use free tier, upgrade only if you need advanced security or more CI/CD minutes
+- **Australian Context**: No data residency concerns for source code; works seamlessly from AU
+
+### Developer Platforms & Infrastructure
+
+#### Cloudflare
+- **Status**: **Highly Recommended**
+- **Free Tier**: Unlimited bandwidth, DDoS protection, SSL certificates, 100k Workers requests/day, 10GB R2 storage, DNS management
+- **Use Cases**:
+  1. **CDN & DDoS Protection**: Free tier protects your website and speeds up delivery
+  2. **Cloudflare Workers**: Serverless edge functions (100k requests/day free)
+  3. **Cloudflare Pages**: Static site hosting with CI/CD (unlimited sites, unlimited requests)
+  4. **Cloudflare R2**: S3-compatible object storage (10GB free, no egress fees)
+  5. **Cloudflare D1**: Serverless SQLite database (in beta, generous free tier)
+  6. **DNS**: Fast, reliable DNS (free, unlimited queries)
+  7. **Cloudflare Tunnel**: Secure access to local services without exposing ports
+- **Key Features**:
+  - Best-in-class DDoS protection (free tier same as paid)
+  - Global CDN with edge caching
+  - Web Application Firewall (WAF) - basic rules free
+  - SSL/TLS certificates (automatic, free)
+  - Analytics and insights
+  - Zero egress fees on R2 (unlike AWS S3)
+- **Upgrade Path**:
+  - **Pro**: $20/month (advanced caching, image optimization)
+  - **Business**: $200/month (custom WAF rules, PCI compliance)
+- **Recommendation**: **Use the free tier immediately** - One of the best free tiers in the industry
+- **Australian Context**: Great CDN performance in APAC region
+
+#### Vercel
+- **Status**: Excellent Platform (with considerations)
+- **Free Tier**: Unlimited deployments, 100GB bandwidth/month, serverless functions, automatic HTTPS, preview deployments
+- **Use Cases**:
+  - Next.js hosting (optimized, created by Vercel)
+  - Static sites and serverless functions
+  - Preview deployments for every PR
+  - Edge functions and middleware
+- **Key Features**:
+  - Zero-config deployments for Next.js, React, Vue, etc.
+  - Automatic preview URLs for pull requests
+  - Built-in CI/CD
+  - Edge network (fast globally)
+  - Analytics (Web Vitals tracking)
+  - Serverless functions with zero cold starts
+- **Upgrade Path**:
+  - **Pro**: $20/user/month (1TB bandwidth, advanced analytics)
+  - **Enterprise**: Custom (SLA, dedicated support)
+- **Ethical/Political Considerations**: Some developers choose to avoid Vercel due to the company's political stances or ethical concerns. This is a personal decision. Alternatives include Cloudflare Pages, Netlify, or self-hosting.
+- **Recommendation**: **Excellent platform** for Next.js and modern web apps; use free tier, evaluate alternatives if ethical concerns apply
+- **Australian Context**: Good APAC performance
+
+#### Netlify
+- **Status**: Strong Alternative to Vercel
+- **Free Tier**: 100GB bandwidth/month, 300 build minutes/month, forms, serverless functions
+- **Use Cases**: Similar to Vercel, but framework-agnostic
+- **Key Features**: Git-based deployments, instant rollbacks, split testing
+- **Recommendation**: Good alternative if avoiding Vercel or not using Next.js
+
+### Backend & Database Services
+
+#### Supabase
+- **Status**: **Highly Recommended**
+- **Free Tier**: 500MB database, 1GB file storage, 50k monthly active users, 2GB bandwidth, unlimited API requests
+- **What It Is**: Open-source Firebase alternative (Postgres-based)
+- **Components**:
+  1. **PostgreSQL Database**: Full Postgres with Row Level Security (RLS)
+  2. **Authentication**: Email, OAuth (Google, GitHub, etc.), magic links, phone auth
+  3. **Storage**: S3-compatible object storage for files
+  4. **Realtime**: Subscribe to database changes (websockets)
+  5. **Edge Functions**: Serverless Deno functions
+  6. **Auto-generated APIs**: RESTful and GraphQL APIs from your schema
+- **Key Features**:
+  - Open-source (can self-host if needed)
+  - PostgreSQL (real database, not NoSQL)
+  - Built-in auth with Row Level Security
+  - Realtime subscriptions
+  - Auto-scaling
+  - Dashboard for database management
+- **Upgrade Path**:
+  - **Pro**: $25/month (8GB database, 100GB bandwidth, daily backups)
+  - **Team**: $599/month (custom resources)
+- **Recommendation**: **Perfect for startups** - Free tier is generous, Postgres is production-ready, can self-host later
+- **Australian Context**: Has Sydney region available (low latency)
+
+#### Neon
+- **Status**: Recommended for Serverless Postgres
+- **Free Tier**: 0.5GB storage per project, 3 projects, unlimited compute hours (with autoscaling to zero)
+- **What It Is**: Serverless Postgres with branching (like Git for databases)
+- **Key Features**:
+  - True serverless (scales to zero when idle)
+  - Database branching (test schema changes safely)
+  - Instant provisioning
+  - Pay only for storage (compute is free on free tier)
+  - Point-in-time recovery
+- **Upgrade Path**:
+  - **Launch**: $19/month (3GB storage, more projects)
+  - **Scale**: $69/month (10GB storage, faster compute)
+- **Recommendation**: Great for side projects and serverless apps; Supabase better if you need auth/storage/realtime
+- **Australian Context**: Uses AWS regions, can select Sydney
+
+### Authentication Services
+
+#### Clerk
+- **Status**: Recommended for Modern Auth
+- **Free Tier**: 10,000 monthly active users, unlimited sign-ins
+- **What It Is**: Complete user management and authentication
+- **Key Features**:
+  - Pre-built UI components (sign-in, sign-up, user profile)
+  - Social logins (Google, GitHub, Microsoft, etc.)
+  - Multi-factor authentication (SMS, TOTP)
+  - User management dashboard
+  - Organizations and teams support
+  - Webhooks and integrations
+  - Beautiful, customizable UI
+- **Upgrade Path**:
+  - **Pro**: $25/month (50k MAUs, advanced features)
+  - **Enterprise**: Custom (SAML SSO, audit logs)
+- **Recommendation**: **Best developer experience** for auth; use if you want to move fast and don't want to build auth UI
+- **Australian Context**: Works globally, no specific AU region needed
+
+#### Supabase Auth
+- **Status**: Included with Supabase
+- **Free Tier**: 50k monthly active users (included in Supabase free tier)
+- **What It Is**: Built-in authentication for Supabase
+- **Key Features**:
+  - Email/password, magic links, OAuth providers
+  - Phone auth (SMS/WhatsApp)
+  - Row Level Security integration
+  - JWT tokens
+  - Self-hostable
+- **Recommendation**: Use if already using Supabase; simpler than Clerk but less features
+- **vs. Clerk**: Clerk has better UI components and user management dashboard; Supabase Auth better integrated with Postgres RLS
+
+### Error Tracking & Monitoring
+
+#### Sentry.io
+- **Status**: **Industry Standard**
+- **Free Tier**: 5,000 errors/month, 10k performance transactions/month, 1 user
+- **What It Is**: Error tracking and performance monitoring
+- **Key Features**:
+  - Real-time error tracking
+  - Stack traces with source maps
+  - Release tracking
+  - Performance monitoring (APM)
+  - User feedback collection
+  - Issue assignment and workflow
+  - Integrations (Slack, Jira, GitHub, etc.)
+  - Breadcrumbs (what user did before error)
+  - Support for 100+ platforms/languages
+- **Upgrade Path**:
+  - **Developer**: $26/month (50k errors, unlimited users)
+  - **Team**: $80/month (100k errors, advanced features)
+- **Recommendation**: **Essential** - Catch errors in production before users report them; free tier sufficient for early stage
+- **Australian Context**: Global edge network, low latency
+- **Self-Hosted**: Open-source, can self-host if needed
+
+#### Better Stack (formerly Logtail)
+- **Status**: Recommended for Logs & Uptime
+- **Free Tier**: 1GB logs/month retained for 3 days, 10 uptime monitors
+- **What It Is**: Logging, uptime monitoring, and incident management
+- **Key Features**:
+  - Structured logging (similar to Datadog Logs)
+  - SQL-based log search
+  - Uptime monitoring (HTTP, ping, etc.)
+  - Incident management
+  - Status pages
+  - Alerting (email, Slack, PagerDuty, etc.)
+  - Beautiful, fast UI
+- **Upgrade Path**:
+  - **Startup**: $20/month (20GB logs, 30-day retention)
+  - **Business**: $100/month (100GB logs, 60-day retention)
+- **Recommendation**: Good alternative to expensive tools like Datadog; free tier good for small projects
+- **vs. Grafana Loki**: Better Stack is SaaS (easier), Loki is self-hosted (more control)
+
+### AI & Development Tools
+
+#### OpenRouter
+- **Status**: Recommended for LLM Access
+- **Free Tier**: Free models available (e.g., Llama 3.1 8B, Mistral 7B), pay-as-you-go for others
+- **What It Is**: Unified API for 100+ LLMs (OpenAI, Anthropic, Google, Meta, etc.)
+- **Key Features**:
+  - Single API for all major LLMs
+  - Model routing (fallbacks, load balancing)
+  - Pay only for what you use
+  - No subscriptions
+  - OpenAI-compatible API
+  - Free models available
+  - Provider credits (sometimes offers free credits)
+- **Pricing**: Pay-per-token (prices vary by model)
+  - GPT-4: ~$0.03/1k input tokens
+  - Claude 3.5 Sonnet: ~$0.003/1k tokens
+  - Free models: $0
+- **Recommendation**: **Use this instead of direct API keys** - Gives flexibility to switch models, better rates, free tiers
+- **Australian Context**: Global API, low latency
+- **vs. Direct APIs**: OpenRouter often cheaper, single integration, easier to switch models
+
+#### v0.dev (Vercel)
+- **Status**: Cutting-Edge AI Tool
+- **Free Tier**: Limited free generations per month (credits-based)
+- **What It Is**: AI-powered UI generation from text prompts
+- **Key Features**:
+  - Generate React/Next.js components from descriptions
+  - Tailwind CSS styling
+  - Interactive preview
+  - Copy/export code
+  - Iterate on designs with AI
+- **Use Cases**:
+  - Rapid prototyping
+  - Generate starter components
+  - Design exploration
+  - Learning React patterns
+- **Upgrade Path**: Credit packs ($10-50 for more generations)
+- **Recommendation**: Great for prototyping and learning; accelerates UI development
+- **Note**: Part of Vercel ecosystem (see ethical considerations above)
 
 ### Security & Code Quality
 
@@ -196,6 +418,84 @@ Your technical infrastructure foundation determines scalability, security, and o
 - [ ] Establish code review requirements (minimum 1-2 reviewers)
 - [ ] Configure branch protection rules
 - [ ] Enable 2FA for all team members
+- [ ] Deploy Sentry.io for error tracking (free tier)
+- [ ] Set up Better Stack or similar for uptime monitoring
+
+---
+
+## The Free Tier Startup Stack 🎁
+
+**You can build a production-ready startup for $0-50/month using these free tiers:**
+
+### Essential Free Tools (Pre-Seed / Bootstrapped)
+
+| Category | Tool | Free Tier | What You Get |
+|----------|------|-----------|--------------|
+| **Hosting/CDN** | Cloudflare | Unlimited | CDN, DDoS protection, SSL, Workers (100k/day), R2 storage (10GB) |
+| **App Hosting** | Vercel or Cloudflare Pages | 100GB/month bandwidth | Unlimited deployments, serverless functions, preview URLs |
+| **Database** | Supabase | 500MB Postgres | Database, auth, storage, realtime, 50k MAUs |
+| **Auth** | Clerk or Supabase Auth | 10k MAUs / 50k MAUs | Complete auth with UI, social logins, MFA |
+| **Source Control** | GitHub | Unlimited | Repos, CI/CD (2k minutes), security scanning, Pages |
+| **Error Tracking** | Sentry | 5k errors/month | Real-time error tracking, performance monitoring |
+| **Monitoring** | Better Stack | 1GB logs, 10 monitors | Logging, uptime monitoring, incident management |
+| **LLM Access** | OpenRouter | Free models | Access to Llama, Mistral, and other open models |
+| **Email** | Resend | 100 emails/day | Transactional email with good deliverability |
+| **Analytics** | Plausible (self-hosted) or Cloudflare Analytics | Free | Privacy-friendly web analytics |
+
+**Total Monthly Cost**: **$0** for early stage (up to ~10k users)
+
+### When to Start Paying
+
+You'll need to upgrade when you hit these limits:
+- **Supabase**: >500MB database or >2GB bandwidth/month → $25/month
+- **Cloudflare**: Need advanced features → $20/month (Pro tier)
+- **Vercel**: >100GB bandwidth → $20/user/month
+- **Sentry**: >5k errors/month → $26/month
+- **Clerk**: >10k MAUs → $25/month
+
+### Recommended Free Tier Stack by Use Case
+
+**SaaS/Web App**:
+- Vercel (hosting) + Supabase (database + auth) + Cloudflare (CDN) + Sentry (errors) + GitHub (code)
+- **Cost**: $0 until significant traction
+
+**Static Site / Marketing Site**:
+- Cloudflare Pages (hosting) + GitHub (source) + Better Stack (uptime)
+- **Cost**: $0 forever (if truly static)
+
+**API / Backend**:
+- Cloudflare Workers (compute) + Supabase (database) + Neon (additional DBs) + Sentry (errors)
+- **Cost**: $0 for 100k requests/day
+
+**AI-Powered App**:
+- Vercel (hosting) + Supabase (database) + OpenRouter (LLMs - free models) + Clerk (auth)
+- **Cost**: $0 + pay-per-use for premium LLMs
+
+### Migration Path from Free Tier
+
+**Stage 1: Free Tier (0-1k users)**
+- Use all free tiers listed above
+- Self-host when possible (Loki for logs, Prometheus for metrics)
+
+**Stage 2: Hybrid ($50-200/month, 1k-10k users)**
+- Upgrade Supabase to Pro ($25/month)
+- Add Sentry Developer ($26/month)
+- Keep Cloudflare free tier
+- Keep Vercel free tier (or upgrade to Pro if needed)
+- Self-hosted observability (Loki + Prometheus)
+
+**Stage 3: Paid Services ($500-2000/month, 10k-100k users)**
+- Supabase Team or self-hosted Postgres
+- Vercel Pro or migrate to self-hosted
+- Sentry Team ($80/month)
+- Consider Datadog or New Relic for unified observability
+- Cloudflare Pro ($20/month)
+
+**Stage 4: Enterprise (100k+ users)**
+- Self-hosted infrastructure (Kubernetes)
+- Enterprise support contracts
+- Dedicated customer success managers
+- Custom SLAs
 
 ---
 
@@ -1164,42 +1464,89 @@ Compliance management systems demonstrate your commitment to security, privacy, 
 ### Startup Stage Recommendations
 
 #### Pre-Seed / Bootstrapped (0-2 people)
-**Technical Infrastructure**:
-- Docker Compose on a VPS
-- Basic logging (at minimum: structured logs to file)
 
-**Tools**:
-- GitHub (source control + project management)
-- Figma (design)
-- Cal.com (scheduling)
+**🎯 Goal**: Ship fast, validate product-market fit, spend $0-50/month
+
+**Free Tier Stack** (Recommended):
+- **Hosting**: Cloudflare Pages or Vercel (100GB bandwidth free)
+- **CDN**: Cloudflare (unlimited, free DDoS protection, SSL)
+- **Database**: Supabase (500MB Postgres, auth, storage - free)
+- **Auth**: Supabase Auth or Clerk (50k/10k MAUs free)
+- **Source Control**: GitHub (unlimited repos, 2k CI/CD minutes free)
+- **Error Tracking**: Sentry (5k errors/month free)
+- **Monitoring**: Better Stack (1GB logs, 10 uptime monitors free)
+- **Email**: Resend (100 emails/day free) or SendGrid (100/day free)
+- **LLMs**: OpenRouter (free models: Llama, Mistral)
+- **Analytics**: Cloudflare Analytics (free) or Plausible (self-hosted)
+
+**Technical Infrastructure**:
+- Deploy to Vercel/Cloudflare Pages (no VPS needed yet)
+- OR Docker Compose on cheap VPS if self-hosting ($5-10/month)
+- Structured logging from day one (use Sentry + Better Stack free tiers)
+
+**Developer Tools** (All Free):
+- GitHub (source control, CI/CD, project management, security scanning)
+- GitHub Copilot (if budget allows: $10/month, huge productivity boost)
+- Figma (design - free for individuals)
+- v0.dev (AI UI generation - limited free credits)
+- Cal.com (scheduling - self-hosted or free tier)
 
 **Legal (Australia)**:
 - Register Pty Ltd (if taking on co-founders or contractors)
 - Open business bank account (Up, Judo, or CommBank)
-- Privacy Policy
-- Terms of Service
-- CIIA for founders
+- Privacy Policy (required before collecting data)
+- Terms of Service (required before accepting users)
+- CIIA for founders (before any work begins)
 
 **Accounting**:
-- Invoice Ninja (if just invoicing) or Xero
+- Invoice Ninja (if just invoicing - free self-hosted) or
+- Xero (if need full accounting - $30-70/month AUD)
 
-**Priority**: Ship product, get customers
+**Monthly Cost Estimate**: **$0-50**
+- $0 if using all free tiers
+- $30-70 if using Xero
+- $10 if using GitHub Copilot
+- $5-10 if self-hosting on VPS instead of Vercel/Cloudflare
+
+**Priority**: Ship product, get customers, validate with real users
+
+**What You Can Build for Free**:
+- Full-stack SaaS app (up to 10k users)
+- Static/marketing website (unlimited traffic)
+- API service (100k requests/day on Cloudflare Workers)
+- AI-powered app (using free LLM models)
+
+**When to Start Paying**:
+- Supabase: >500MB database or >50k MAUs → $25/month
+- Vercel: >100GB bandwidth → $20/month
+- Sentry: >5k errors/month → $26/month
+- Clerk: >10k MAUs → $25/month
 
 **Note**: If solo and not hiring yet, you can delay Pty Ltd registration until first hire or funding round. Use sole trader structure initially if needed.
 
 #### Seed Stage (3-10 people)
+
+**🎯 Goal**: Professionalize operations, enable team collaboration, $200-1000/month
+
+**Developer Platform Transition**:
+- **Keep free tiers**: Cloudflare (still free), GitHub (still free), Sentry (may need upgrade)
+- **Upgrade when needed**: Supabase Pro ($25/month), Vercel Pro ($20/month if >100GB)
+- **Consider**: Migrate to self-hosted if hitting limits (Postgres, app hosting)
+
 **Technical Infrastructure**:
-- Docker or Proxmox
+- Docker or Proxmox (if self-hosting)
+- OR continue with Vercel/Cloudflare + upgrade tiers
 - Proper staging/production separation
 - **Observability from day one**: Loki (logging), Prometheus + Grafana (metrics)
 - VPN for infrastructure access (Tailscale or Headscale)
 
 **Tools**:
-- Jira or Linear
+- Jira or Linear (project management)
 - ERPNext or Xero (Australian accounting)
 - Twenty CRM or dedicated CRM
 - n8n for automation
 - Full security toolchain (Snyk, Dependabot, GitGuardian)
+- **Continue using**: Sentry (upgrade to Developer $26/month if needed)
 
 **Observability & Monitoring**:
 - **Logging**: Deploy Grafana Loki for centralized logs
@@ -1335,7 +1682,16 @@ Building a comprehensive business operating system is an iterative process. Star
 
 ### For Australian Startups:
 
-1. **Legal foundation**
+1. **Start with free tiers** (Pre-Seed: $0-50/month)
+   - Cloudflare (CDN, DDoS, SSL - free forever)
+   - Vercel or Cloudflare Pages (hosting - 100GB free)
+   - Supabase (database + auth - 500MB free)
+   - GitHub (source control + CI/CD - 2k minutes free)
+   - Sentry (error tracking - 5k errors free)
+   - Better Stack (logs + uptime - 1GB free)
+   - OpenRouter (free LLM models available)
+
+2. **Legal foundation**
    - Register Pty Ltd (before hiring or funding)
    - Open business bank account (Up, Judo, CommBank, or Airwallex)
    - Implement CIIA/PIIA before any work begins
@@ -1343,33 +1699,46 @@ Building a comprehensive business operating system is an iterative process. Star
    - Set up Xero or ERPNext for accounting
    - Register for GST (if >$75k revenue or voluntary)
 
-2. **Security basics**
-   - Enable all free security tools (Dependabot, GitGuardian, Snyk)
+3. **Security basics** (mostly free)
+   - Enable all free security tools (Dependabot, GitGuardian, Snyk free tiers)
    - Implement proper access controls
    - MFA everywhere
+   - Sentry for error tracking (free tier sufficient early on)
 
-3. **Observability from day one**
-   - Structured logging (Loki)
-   - Metrics (Prometheus + Grafana)
+4. **Observability from day one**
+   - Structured logging (Sentry + Better Stack free tiers, then Loki)
+   - Metrics (Prometheus + Grafana when self-hosting)
    - Correlation IDs across services
 
-4. **Core infrastructure** (appropriate to your scale)
-   - Pre-Seed: Docker Compose on VPS
-   - Seed: Docker/Proxmox with proper environments
+5. **Core infrastructure** (appropriate to your scale)
+   - Pre-Seed: Vercel/Cloudflare Pages (free) or Docker Compose ($5-10/month VPS)
+   - Seed: Upgrade free tiers or migrate to Docker/Proxmox
    - Series A+: Kubernetes
 
-5. **Essential tools**
-   - GitHub (source control)
+6. **Essential tools**
+   - GitHub (source control - free)
    - Jira or Linear (project management)
    - Xero or ERPNext (accounting)
    - n8n (automation)
 
-6. **Documentation habits**
+7. **Documentation habits**
    - Policies, procedures, decisions
    - Employee handbook
    - Contractor agreements
 
 Then build systematically toward mature compliance and management systems as you grow. The key is to start with good foundations and iterate continuously.
+
+### The Free Tier Advantage
+
+**You can build a production-ready SaaS for $0-50/month** using the generous free tiers from:
+- Cloudflare (CDN, Workers, Pages, R2, D1)
+- Vercel or Netlify (hosting, serverless functions)
+- Supabase (Postgres, auth, storage, realtime)
+- GitHub (source control, CI/CD, security)
+- Sentry (error tracking)
+- OpenRouter (free LLM models)
+
+This means you can **validate your idea and reach your first 1,000 users without spending money on infrastructure**. Only upgrade when you hit limits or need advanced features.
 
 ### Raising US Venture Capital?
 
@@ -1383,7 +1752,9 @@ Your business operating system should enable your team to work efficiently, secu
 
 ---
 
-**Document Version**: 2.0 (Australian Edition)
+**Document Version**: 2.1 (Australian Edition + Free Tier Focus)
 **Last Updated**: 2025-11-17
 **Target Audience**: Australian Startups
 **Maintained By**: Community
+
+**Version 2.1 Changes**: Added comprehensive developer platform coverage (GitHub, Cloudflare, Vercel, Supabase, Neon, Clerk, Sentry, Better Stack, OpenRouter, v0.dev) with focus on free tiers and upgrade paths.
