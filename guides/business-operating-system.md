@@ -1,10 +1,22 @@
 # Business Operating System Selection Guide
 
+**🇦🇺 Tailored for Australian Startups**
+
+---
+
 ## Introduction
 
 Choosing the right business operating system (BOS) is one of the most critical decisions you'll make when starting or scaling a technology business. Your BOS encompasses not just the technical infrastructure, but also the tools, processes, legal frameworks, and management systems that enable your business to operate efficiently, securely, and in compliance with regulatory requirements.
 
-This guide provides industry-agnostic recommendations for building a comprehensive business operating system, from technical infrastructure to compliance frameworks.
+**This guide is specifically tailored for Australian startups**, with Australia-specific guidance on:
+- **Business formation**: Pty Ltd registration, ASIC, ABN, ACN, GST, superannuation
+- **Banking**: Australian banks and fintechs (Up, Judo, CommBank, Airwallex, Wise)
+- **Accounting**: Xero (Australian standard), ERPNext, and tax compliance (BAS, STP, GST)
+- **Employment law**: Fair Work Act, Modern Awards, superannuation guarantee
+- **Privacy**: Australian Privacy Act, alongside GDPR and international compliance
+- **VC fundraising**: Guidance on Delaware C-Corp flip for US venture capital
+
+While the technical infrastructure and tooling recommendations are globally applicable, business formation, legal, and compliance sections prioritize Australian context.
 
 ---
 
@@ -204,7 +216,23 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
   - International data transfers
 - **Action**: Draft and publish before collecting any user data
 
-#### 2. Terms of Service (ToS)
+#### 2. Data Processing Agreement (DPA)
+- **Purpose**: Document data processing relationships for GDPR and privacy compliance
+- **Required By**: GDPR (when processing data on behalf of customers), Australian Privacy Act (for B2B data handling)
+- **Key Elements**:
+  - Processor and controller roles clearly defined
+  - Scope and purpose of data processing
+  - Security measures and technical safeguards
+  - Sub-processor authorization and disclosure
+  - Data breach notification procedures
+  - Data subject rights fulfillment process
+  - Data retention and deletion obligations
+  - Audit rights and compliance verification
+  - Termination and data return procedures
+- **Use Case**: Essential for B2B SaaS handling customer data, any service processing data on behalf of others
+- **Action**: Required before processing any B2B customer data in the EU/AU
+
+#### 3. Terms of Service (ToS)
 - **Purpose**: Define the legal relationship between your business and users
 - **Key Elements**:
   - Acceptable use policy
@@ -214,7 +242,7 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
   - Service availability and modifications
 - **Action**: Required before accepting users/customers
 
-#### 3. Master Services Agreement (MSA)
+#### 4. Master Services Agreement (MSA)
 - **Purpose**: Standard contract terms for B2B relationships
 - **Key Elements**:
   - Service scope and deliverables
@@ -224,16 +252,44 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
   - Termination conditions
 - **Use Case**: Essential for consulting, SaaS, or service businesses
 
-#### 4. Confidentiality and Invention Assignment Agreement (CIIA/PIIA)
+#### 5. Confidentiality and Invention Assignment Agreement (CIIA/PIIA)
 - **Purpose**: Protect intellectual property and ensure company ownership of work product
 - **Key Elements**:
   - IP assignment to company
   - Confidentiality obligations
-  - Non-compete clauses (where enforceable)
+  - Non-compete clauses (limited enforceability in Australia—consult local counsel)
   - Prior inventions disclosure
 - **Action**: **All employees and contractors must sign** before starting work
+- **Australian Note**: Non-compete clauses have limited enforceability; focus on IP assignment and confidentiality
 
-#### 5. PII Management Plan
+#### 6. Contractor & Vendor Agreements
+- **Purpose**: Define terms for independent contractors and vendor relationships
+- **Key Elements**:
+  - Scope of work and deliverables
+  - Payment terms and schedule
+  - IP ownership (work-for-hire provisions)
+  - Confidentiality and NDA clauses
+  - Indemnification and liability
+  - Termination conditions
+  - Insurance requirements (for contractors)
+- **Use Case**: Engaging freelancers, contractors, service providers, or vendors
+- **Action**: Required before any contractor or vendor begins work
+
+#### 7. Employee Handbook
+- **Purpose**: Document policies, expectations, and procedures for employees
+- **Key Elements**:
+  - Code of conduct and values
+  - Work hours, leave, and benefits
+  - Remote work policies
+  - Security and acceptable use policies
+  - Harassment and discrimination policies
+  - Performance review process
+  - Disciplinary procedures
+  - Termination policies
+- **Australian Compliance**: Must comply with Fair Work Act, Modern Awards, and National Employment Standards
+- **Action**: Implement before hiring first employee
+
+#### 8. PII Management Plan
 - **Purpose**: Document how Personally Identifiable Information is handled
 - **Key Elements**:
   - PII inventory and classification
@@ -243,7 +299,7 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
   - Third-party processor management
 - **Compliance**: Required for GDPR, HIPAA, SOC 2, and other frameworks
 
-#### 6. Information Security Management System (ISMS) Plan
+#### 9. Information Security Management System (ISMS) Plan
 - **Purpose**: Systematic approach to managing information security
 - **Key Elements**:
   - Security policies and procedures
@@ -261,10 +317,13 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
 |----------|----------|------------------|
 | 1 | CIIA/PIIA | Before any work begins |
 | 2 | Privacy Policy | Before collecting any data |
+| 2.5 | DPA (Data Processing Agreement) | Before processing B2B customer data (EU/AU) |
 | 3 | Terms of Service | Before accepting users |
 | 4 | PII Management Plan | Before handling customer data |
-| 5 | MSA | Before engaging B2B customers |
-| 6 | ISMS Plan | Within first 6 months of operation |
+| 4.5 | Contractor & Vendor Agreements | Before engaging contractors/vendors |
+| 5 | Employee Handbook | Before hiring first employee |
+| 6 | MSA | Before engaging B2B customers |
+| 7 | ISMS Plan | Within first 6 months of operation |
 
 ---
 
@@ -299,6 +358,106 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
 #### OpenMSP.ai (Openframe-oss-tenant)
 - **Purpose**: Open-source managed service provider platform
 - **Use Case**: MSPs and organizations managing multiple tenants
+
+### Observability & Operational Monitoring
+
+**Critical Requirement**: Structured logging, metrics collection, and distributed tracing are **foundational infrastructure requirements**, not optional add-ons. Implement from day one to enable debugging, performance optimization, and incident response.
+
+#### Logging
+
+**Purpose**: Centralized log aggregation, search, and analysis
+
+**Recommended Solutions**:
+- **ELK Stack** (Elasticsearch, Logstash, Kibana)
+  - Industry standard, powerful search
+  - Self-hostable or managed (Elastic Cloud)
+  - Resource-intensive
+
+- **Loki** (Grafana Loki)
+  - Lightweight, cost-effective alternative to ELK
+  - Integrates with Grafana
+  - Less resource-intensive
+  - **Recommended** for most startups
+
+- **Managed Alternatives**: Datadog, New Relic, Splunk (expensive but turnkey)
+
+**Best Practices**:
+- Structured logging (JSON format)
+- Correlation IDs for request tracing across services
+- Log levels (DEBUG, INFO, WARN, ERROR)
+- Retention policies (30-90 days minimum, 1+ year for compliance)
+- Aggregation by service, environment, severity
+
+#### Metrics Collection
+
+**Purpose**: Time-series metrics for performance monitoring and alerting
+
+**Recommended Solutions**:
+- **Prometheus** + **Grafana**
+  - Industry standard for metrics
+  - Excellent for Kubernetes/containerized environments
+  - Self-hostable
+  - **Highly Recommended**
+
+- **Managed Alternatives**: Datadog, New Relic, CloudWatch
+
+**Key Metrics**:
+- Application: Request rate, error rate, latency (RED metrics)
+- Infrastructure: CPU, memory, disk, network (USE metrics)
+- Business: User signups, transactions, revenue
+
+**Best Practices**:
+- Instrument all services from day one
+- Set up alerting thresholds
+- Dashboard for key metrics
+- Regular review and refinement
+
+#### Distributed Tracing
+
+**Purpose**: Track requests across microservices and distributed systems
+
+**Recommended Solutions**:
+- **Jaeger**
+  - Open-source, CNCF project
+  - Good Kubernetes integration
+  - Self-hostable
+
+- **Tempo** (Grafana Tempo)
+  - Lightweight, cost-effective
+  - Integrates with Grafana ecosystem
+  - **Recommended** if using Loki and Grafana
+
+- **Managed Alternatives**: Datadog APM, New Relic, Honeycomb
+
+**When You Need It**:
+- Microservices architecture (3+ services)
+- Performance debugging across services
+- Complex request flows
+
+**Best Practices**:
+- Use OpenTelemetry for instrumentation
+- Correlation IDs across all logs and traces
+- Sample traces intelligently (not 100%)
+- Integrate with alerting
+
+#### Observability Stack Recommendations
+
+**For Startups (Seed Stage)**:
+- **Logging**: Grafana Loki
+- **Metrics**: Prometheus + Grafana
+- **Tracing**: Grafana Tempo (when needed)
+- **Cost**: ~$50-200/month (self-hosted on VPS)
+
+**For Growing Companies (Series A+)**:
+- **Option 1 (Self-Hosted)**: ELK + Prometheus + Jaeger
+- **Option 2 (Managed)**: Datadog or New Relic (all-in-one)
+- **Cost**: $500-5000+/month depending on scale
+
+**Instrumentation Libraries**:
+- **Python**: OpenTelemetry Python
+- **Node.js**: OpenTelemetry JS
+- **Go**: OpenTelemetry Go
+- **Java**: OpenTelemetry Java
 
 ### Identity & Access Management
 
@@ -348,51 +507,131 @@ Establishing proper legal and compliance documentation is **non-negotiable** for
 
 ## Business Formation
 
+**Note**: This guide is tailored for **Australian startups**. If you're planning to raise US venture capital, you'll likely need to establish a Delaware C-Corp later (see "VC Fundraising Considerations" below).
+
 ### Critical First Steps
 
-#### 1. Register an LLC (Limited Liability Company)
+#### 1. Register a Pty Ltd Company (Australia)
 - **Priority**: **Do this ASAP**
-- **Why LLC**:
-  - Personal liability protection
-  - Tax flexibility (pass-through or corporation taxation)
-  - Credibility with customers and partners
+- **Why Pty Ltd**:
+  - Limited liability protection (separates personal and business assets)
+  - Professional credibility with customers and partners
   - Required for business banking
-- **Considerations**:
-  - State of incorporation (Delaware for startups, home state for simplicity)
-  - Operating agreement
-  - Registered agent
-  - Annual compliance requirements
+  - Tax benefits (company tax rate 25-30% vs. individual rates)
+  - Ability to raise investment
+- **Registration Process**:
+  - Register via **ASIC** (Australian Securities and Investments Commission)
+  - Can use online services (ASIC Connect) or accountant/lawyer
+  - Cost: ~$500-600 registration fee
+  - Timeline: 1-3 business days
+- **Requirements**:
+  - Choose and reserve company name (check ASIC register)
+  - Registered office address (can be home address or accountant's address)
+  - At least 1 director (must be Australian resident)
+  - At least 1 shareholder
+  - Company constitution or adopt replaceable rules
+  - ACN (Australian Company Number) issued automatically
+  - ABN (Australian Business Number) - apply separately via ATO
+  - TFN (Tax File Number) for the company
 - **Timeline**: Complete within first 30 days of business operations
 
+**VC Fundraising Considerations**:
+- If raising from **US venture capital**, you'll typically need a **Delaware C-Corp**
+- Structure: Australian Pty Ltd as operating company, Delaware C-Corp as holding company ("flip" structure)
+- **When to flip**: Before first US VC round (Seed/Series A)
+- **Cost**: $5,000-20,000 in legal fees for proper structure
+- Consult startup lawyer familiar with AU→US flips before raising US VC
+
 #### 2. Open a Company Bank Account
-- **Priority**: **Immediately after LLC registration**
+- **Priority**: **Immediately after company registration**
 - **Why It Matters**:
   - Separates personal and business finances
   - Essential for accounting and taxes
   - Required for professional credibility
-  - Protects LLC liability shield
+  - Protects limited liability shield
+  - Compliance with ATO (Australian Taxation Office) requirements
 - **Requirements**:
-  - LLC registration documents
-  - EIN (Employer Identification Number)
-  - Operating agreement
-  - Personal identification
-- **Recommendations**:
-  - Mercury (tech-focused)
-  - Brex (if raising venture capital)
-  - Traditional banks (Chase, Wells Fargo) for established businesses
+  - ASIC company registration documents
+  - ACN and ABN
+  - Director identification
+  - Proof of business address
+  - Company constitution or replaceable rules
 
-### Business Formation Checklist
+**Banking Recommendations by Region & Stage**:
 
-- [ ] Research and select state of incorporation
-- [ ] Register LLC with state
-- [ ] Obtain EIN from IRS
-- [ ] Draft and sign operating agreement
-- [ ] Open business bank account
-- [ ] Set up business accounting system (QuickBooks, Xero, or ERPNext)
-- [ ] Establish record-keeping system
-- [ ] Register for state and local taxes
+### Australia (Domestic Focus)
+- **Startups / Early Stage**:
+  - **Up Bank** (digital-first, excellent UX, fee-free)
+  - **Judo Bank** (SME-focused, good startup support)
+  - **Xero integration**: Most AU banks integrate
+
+- **Growing / Traditional**:
+  - **CommBank** (Commonwealth Bank) - Best overall for business
+  - **NAB** (National Australia Bank) - Good business banking
+  - **Westpac** or **ANZ** - Alternatives
+
+- **International / Multi-Currency**:
+  - **Wise Business** (formerly TransferWise) - Best FX rates, multi-currency
+  - **Airwallex** (Australian fintech, great for international payments)
+
+### If Raising US VC / International Focus
+- **Stripe Atlas** + **Mercury** or **Brex** for US entity
+- Keep Australian Pty Ltd with Australian bank
+- Dual structure requires intercompany agreements
+
+### Other Regions (Reference)
+
+**United States**:
+- Mercury (tech-focused, excellent for startups)
+- Brex (if raising venture capital, corporate cards)
+- Chase, Wells Fargo (traditional, established businesses)
+
+**Europe**:
+- Revolut Business (multi-currency, excellent FX)
+- Wise Business (best international transfers)
+- N26 Business (Germany/EU)
+- Local challenger banks by country
+
+**Asia-Pacific (outside AU)**:
+- Wise Business (best cross-border)
+- Regional digital banks (e.g., DBS in Singapore)
+- Major local banks for compliance/regulation
+
+**Latin America**:
+- Local neobanks (country-specific)
+- Wise Business for international
+- Major regional banks (Itaú, Banco do Brasil, etc.)
+
+**Banking Decision Factors**:
+- **Startup stage**: Early-stage → digital banks (Up, Airwallex); Later → traditional (CommBank, NAB)
+- **VC requirements**: US VCs may require US bank account
+- **Multi-currency needs**: Wise, Airwallex for best FX rates
+- **Local regulation**: Always maintain local-regulated bank for compliance
+- **Integration**: Check accounting software integration (Xero, ERPNext)
+
+### Business Formation Checklist (Australia)
+
+- [ ] Choose company name and check ASIC availability
+- [ ] Register Pty Ltd company with ASIC
+- [ ] Obtain ACN (issued automatically)
+- [ ] Apply for ABN via ATO
+- [ ] Apply for company TFN
+- [ ] Draft or adopt company constitution
+- [ ] Open business bank account (Up, Judo, CommBank, or Wise)
+- [ ] Set up business accounting system (Xero or ERPNext - Xero very popular in AU)
+- [ ] Register for GST (if expecting $75k+ revenue, or voluntary)
+- [ ] Set up PAYG withholding (if hiring employees)
 - [ ] Obtain necessary business licenses and permits
-- [ ] Set up business insurance (general liability, E&O, cyber)
+- [ ] Set up business insurance (public liability, professional indemnity, cyber)
+- [ ] Register domain name and trademarks (IP Australia)
+- [ ] Set up super fund for directors/employees (superannuation obligations)
+
+**Australian-Specific Compliance**:
+- **Fair Work Act**: Employment law compliance
+- **Superannuation Guarantee**: 11.5% (as of 2024-25) employer contributions
+- **PAYG Withholding**: Tax withholding for employees
+- **GST**: Register if turnover >$75k (or voluntary)
+- **Single Touch Payroll (STP)**: Required for payroll reporting to ATO
 
 ---
 
@@ -647,37 +886,106 @@ Compliance management systems demonstrate your commitment to security, privacy, 
 | Your Business | Priority Frameworks |
 |---------------|-------------------|
 | SaaS / Software | ISMS, PIMS, SMS |
-| Healthcare | ISMS, PIMS, QMS + HIPAA |
-| Financial Services | ISMS, PIMS, QMS + industry regulations |
+| Healthcare | ISMS, PIMS, QMS + **HIPAA** (see details below) |
+| Financial Services | ISMS, PIMS, QMS + industry regulations (PCI DSS, SOX, etc.) |
 | AI/ML Products | ISMS, PIMS, AI RMF |
 | Professional Services | QMS, SMS, ISMS |
 | E-commerce | PIMS, ISMS, QMS |
+
+### HIPAA Compliance Requirements (Healthcare Organizations)
+
+**⚠️ Critical**: If you handle Protected Health Information (PHI) in the **United States**, HIPAA compliance is **legally required**. Non-compliance can result in fines up to $1.5M per violation category per year.
+
+**Australian Note**: Australia has the **Privacy Act** and **My Health Records Act**, not HIPAA. Consult healthcare legal specialists for Australian health data requirements. The following is US-focused.
+
+**HIPAA-Specific Requirements**:
+
+1. **Business Associate Agreements (BAAs)**
+   - Execute BAAs with **all vendors** that access PHI (cloud providers, SaaS tools, contractors)
+   - AWS, Google Cloud, Azure provide BAAs; ensure they're signed
+   - Include BAA language in vendor contracts before PHI exposure
+   - Maintain registry of all business associates
+
+2. **Audit Logging & Retention**
+   - **Requirement**: Log all PHI access, modifications, and disclosures
+   - **Retention**: Minimum 6 years (HIPAA requirement)
+   - **SIEM Integration**: Connect logs to Wazuh or similar SIEM for monitoring
+   - **Access Controls**: Who accessed what PHI, when, and why
+   - **Automated Alerts**: Unusual access patterns, bulk downloads
+
+3. **Breach Notification Procedures**
+   - **Timeline**: 60 days to notify affected individuals after breach discovery
+   - **Requirements**: Notify HHS (Department of Health & Human Services) and individuals
+   - **Documentation**: Maintain breach response playbook
+   - **Media Notification**: Required if breach affects 500+ individuals
+   - **Incident Response Plan**: Test annually
+
+4. **Encryption Standards**
+   - **Data at Rest**: AES-256 encryption for all PHI storage
+   - **Data in Transit**: TLS 1.2+ for all PHI transmission
+   - **Key Management**: Secure key storage (AWS KMS, HSM, etc.)
+   - **Laptop/Mobile**: Full-disk encryption for any device accessing PHI
+
+5. **Access Controls & Least Privilege**
+   - **Role-Based Access Control (RBAC)**: Implement for all PHI access
+   - **Minimum Necessary**: Users access only PHI needed for their role
+   - **MFA Required**: Multi-factor authentication for all PHI access
+   - **Session Timeouts**: Automatic logout after inactivity
+   - **Unique User IDs**: No shared credentials
+
+6. **Training & Risk Assessments**
+   - **HIPAA Training**: Required for all workforce members handling PHI
+   - **Frequency**: Annual training minimum, document completion
+   - **Risk Assessments**: Annual HIPAA risk analysis (required)
+   - **Security Risk Assessment (SRA)**: Identify vulnerabilities
+   - **Documentation**: Maintain all training and assessment records
+
+**🚨 Compliance Mandate**: If you're building a US healthcare product, **consult a healthcare compliance attorney or specialist immediately**. HIPAA violations carry severe penalties.
+
+**Resources for HIPAA Compliance**:
+- **HHS HIPAA Portal**: https://www.hhs.gov/hipaa/index.html
+- **HIPAA Security Rule Checklist**: https://www.hhs.gov/hipaa/for-professionals/security/guidance/index.html
+- **Compliancy Group, HIPAA One**: Third-party compliance platforms
+- **Legal Counsel**: Engage healthcare-specialized attorney
 
 ### Implementation Roadmap
 
 #### Months 1-3: Foundation
 - [ ] Draft Privacy Policy and Terms of Service
+- [ ] Draft DPA (Data Processing Agreement) if processing B2B customer data
 - [ ] Implement CIIA/PIIA for all team members
 - [ ] Begin PII Management Plan
 - [ ] Start basic ISMS documentation
+- [ ] **Healthcare**: Execute BAAs with all vendors before handling PHI
+- [ ] **Healthcare**: Implement AES-256 encryption for data at rest
+- [ ] **Healthcare**: Enforce TLS 1.2+ for data in transit
 
 #### Months 4-6: Core Systems
 - [ ] Establish basic QMS processes
 - [ ] Complete PIMS framework
 - [ ] Implement core SMS processes (if applicable)
 - [ ] Conduct initial risk assessments
+- [ ] **Healthcare**: Deploy audit logging system with 6-year retention
+- [ ] **Healthcare**: Integrate audit logs with SIEM (Wazuh)
+- [ ] **Healthcare**: Conduct initial HIPAA Security Risk Assessment (SRA)
 
 #### Months 7-12: Maturity
 - [ ] Complete ISMS implementation
 - [ ] Achieve baseline compliance with relevant frameworks
 - [ ] Conduct internal audits
 - [ ] If using AI: Implement AI RMF
+- [ ] **Healthcare**: Document breach response plan and notification playbooks
+- [ ] **Healthcare**: Implement and test 60-day breach notification procedures
+- [ ] **Healthcare**: Complete HIPAA workforce training (annual requirement)
+- [ ] **Healthcare**: Verify RBAC and least privilege access controls
 
 #### Year 2+: Certification & Optimization
 - [ ] Pursue ISO certifications (27001, 9001, etc.)
 - [ ] Achieve SOC 2 compliance (if B2B SaaS)
 - [ ] Continuous improvement and optimization
 - [ ] Regular audits and reviews
+- [ ] **Healthcare**: Schedule external HIPAA compliance audit and legal review
+- [ ] **Healthcare**: Annual HIPAA training and risk assessment (ongoing requirement)
 
 ---
 
@@ -695,23 +1003,105 @@ Compliance management systems demonstrate your commitment to security, privacy, 
   - Privacy-focused
 - **Use Case**: Customer pipeline management, sales tracking
 
-### Financial Management
+### Financial Management & Accounting
 
-#### Fintracker (Maybe)
-- **Type**: Financial tracking
-- **Status**: Evaluate based on specific needs
-- **Alternative**: Consider ERPNext's financial modules
+**Critical Decision**: Choose between integrated ERP (ERPNext) or dedicated financial tools based on your business model and complexity.
 
-#### Invoice Ninja
+#### Decision Framework: ERPNext vs. Dedicated Tools
+
+**Choose ERPNext (Integrated ERP) if:**
+- You sell **physical products** (need inventory management)
+- You **manufacture** anything (need BOM, production planning)
+- You need **CRM + Accounting + Inventory** in one system
+- You're a **growing business** (10+ people) wanting unified system
+- You want to **consolidate multiple tools** into one platform
+- **Australian context**: Works well, though Xero is more common for pure accounting
+
+**Choose Invoice Ninja if:**
+- **Freelancer** or **solo consultant** (<5 people)
+- **Services business** (consulting, agency, no inventory)
+- You need **invoicing + expenses** only (not full accounting)
+- You want **self-hosted** lightweight solution
+- You prefer dedicated tool over full ERP
+
+**Choose Xero (Australia-Specific) if:**
+- You need **Australian tax compliance** (BAS, GST, STP, superannuation)
+- You're a **services or consulting business** (no inventory/manufacturing)
+- Your **accountant recommends it** (most AU accountants use Xero)
+- You want **cloud-based** accounting with excellent AU bank integrations
+- **Pricing**: $30-70/month AUD
+- **Recommendation**: **Most popular for Australian small businesses**
+
+**Choose QuickBooks if:**
+- You're in a **US market** or have US entity
+- Need US tax compliance
+- **Alternative**: Less popular in Australia vs. Xero
+
+**Choose MYOB if:**
+- **Older Australian businesses** (legacy, less common for startups)
+- Specific industry requirements
+- **Note**: Xero has largely overtaken MYOB for startups
+
+#### Recommended Path by Business Type
+
+| Business Type | Team Size | Recommended Solution |
+|---------------|-----------|---------------------|
+| Freelancer / Consultant | 1-3 | Invoice Ninja or Xero |
+| Services / Agency | 4-10 | Xero (AU) or ERPNext |
+| SaaS (no inventory) | Any | Xero + Stripe Billing, or ERPNext |
+| E-commerce | Any | ERPNext (inventory + accounting) |
+| Manufacturing | Any | ERPNext (BOM + inventory + accounting) |
+| Physical Products | Any | ERPNext (inventory + accounting) |
+
+#### Invoice Ninja (Invoicing & Expenses)
 - **Type**: Invoicing and billing
-- **Best For**: Freelancers, agencies, service businesses
+- **Best For**: Freelancers, agencies, service businesses (<10 people)
 - **Key Features**:
   - Invoice generation
-  - Payment processing
+  - Payment processing (Stripe, PayPal)
   - Expense tracking
+  - Time tracking
   - Client portal
-  - Self-hostable
-- **Recommendation**: Strong option for businesses needing invoicing
+  - Self-hostable or cloud
+  - **Not full accounting** (no chart of accounts, tax reporting)
+- **Pricing**: Free (self-hosted) or $10-15/month (cloud)
+- **When to Use**: Simple invoicing needs, not full accounting
+
+#### Xero (Australia - Accounting)
+- **Type**: Cloud accounting platform
+- **Best For**: Australian small businesses, services, consulting
+- **Key Features**:
+  - Full double-entry accounting
+  - GST, BAS, and STP compliance
+  - Superannuation integration
+  - Bank reconciliation (excellent AU bank support)
+  - Payroll (add-on)
+  - Invoicing included
+  - Accountant collaboration (most AU accountants use Xero)
+- **Pricing**: $30-70/month AUD (Starter, Standard, Premium)
+- **Australian Recommendation**: **Default choice for most Australian startups**
+- **Website**: https://www.xero.com/au/
+
+#### ERPNext (Integrated ERP - Accounting + Everything)
+- **Type**: Full ERP suite (accounting, inventory, CRM, HR, manufacturing)
+- **Best For**: Product businesses, manufacturers, growing companies wanting integration
+- **Key Features**:
+  - Complete accounting (chart of accounts, journal entries, financial reports)
+  - Inventory management
+  - CRM and sales
+  - Purchase and supply chain
+  - Manufacturing (BOM, work orders)
+  - Payroll and HR
+  - Multi-currency
+  - Self-hostable or Frappe Cloud
+- **Pricing**: Free (self-hosted) or $10-50/user/month (Frappe Cloud)
+- **Australian Tax**: Requires configuration for AU tax compliance (GST, STP)
+- **When to Use**: Need integrated business system beyond just accounting
+
+**Our Recommendation for Australian Startups**:
+- **Services/Consulting (1-10 people)**: **Xero** (industry standard in AU)
+- **Product/E-commerce/Manufacturing**: **ERPNext** (integrated inventory + accounting)
+- **Solo Freelancer (budget-conscious)**: **Invoice Ninja** (just invoicing, add Xero when revenue grows)
 
 ### Automation & Workflow
 
@@ -776,33 +1166,52 @@ Compliance management systems demonstrate your commitment to security, privacy, 
 #### Pre-Seed / Bootstrapped (0-2 people)
 **Technical Infrastructure**:
 - Docker Compose on a VPS
+- Basic logging (at minimum: structured logs to file)
 
 **Tools**:
 - GitHub (source control + project management)
 - Figma (design)
 - Cal.com (scheduling)
 
-**Legal**:
+**Legal (Australia)**:
+- Register Pty Ltd (if taking on co-founders or contractors)
+- Open business bank account (Up, Judo, or CommBank)
 - Privacy Policy
 - Terms of Service
 - CIIA for founders
 
+**Accounting**:
+- Invoice Ninja (if just invoicing) or Xero
+
 **Priority**: Ship product, get customers
+
+**Note**: If solo and not hiring yet, you can delay Pty Ltd registration until first hire or funding round. Use sole trader structure initially if needed.
 
 #### Seed Stage (3-10 people)
 **Technical Infrastructure**:
 - Docker or Proxmox
 - Proper staging/production separation
+- **Observability from day one**: Loki (logging), Prometheus + Grafana (metrics)
+- VPN for infrastructure access (Tailscale or Headscale)
 
 **Tools**:
 - Jira or Linear
-- ERPNext
+- ERPNext or Xero (Australian accounting)
 - Twenty CRM or dedicated CRM
 - n8n for automation
 - Full security toolchain (Snyk, Dependabot, GitGuardian)
 
+**Observability & Monitoring**:
+- **Logging**: Deploy Grafana Loki for centralized logs
+- **Metrics**: Prometheus + Grafana for application and infrastructure metrics
+- **Instrumentation**: Add OpenTelemetry to all services
+- **Alerting**: Set up alerts for errors, latency, resource usage
+- **Correlation IDs**: Implement across all services for request tracing
+
 **Legal**:
-- All foundational legal docs
+- All foundational legal docs (Privacy Policy, ToS, DPA, CIIA)
+- Contractor & Vendor Agreements
+- Employee Handbook
 - PII Management Plan
 - Basic ISMS
 
@@ -810,21 +1219,37 @@ Compliance management systems demonstrate your commitment to security, privacy, 
 - Start PIMS
 - Begin QMS processes
 
+**Australian-Specific**:
+- Register Pty Ltd
+- Open business bank account (Up, Airwallex, or CommBank)
+- Set up Xero or ERPNext for accounting
+- GST registration (if >$75k revenue)
+- Superannuation fund for employees
+
 #### Series A+ (10+ people)
 **Technical Infrastructure**:
 - Kubernetes (managed or self-hosted)
 - Multi-environment (dev/staging/prod)
 - Wazuh for security monitoring
+- High availability and disaster recovery
+
+**Observability & Monitoring**:
+- **Full observability stack**: ELK or Loki (logging), Prometheus (metrics), Jaeger/Tempo (tracing)
+- **Or managed**: Datadog, New Relic all-in-one
+- **On-call rotation**: PagerDuty or similar
+- **Incident management**: Formal incident response process
 
 **Tools**:
 - Full stack as outlined in guide
 - Dedicated security team
 - Formal incident response
+- ERPNext or enterprise ERP
+- Full HR systems
 
 **Legal & Compliance**:
 - Full ISMS implementation
 - SOC 2 Type II (if B2B)
-- ISO 27001 preparation
+- ISO 27001 preparation or certification
 - Complete QMS
 - SMS implementation
 - AI RMF (if applicable)
@@ -834,14 +1259,21 @@ Compliance management systems demonstrate your commitment to security, privacy, 
 - Legal counsel on retainer
 - Dedicated compliance team
 
+**Australian-Specific**:
+- Consider Delaware C-Corp flip if raising from US VCs
+- Ensure Fair Work Act compliance
+- Implement Enterprise Agreement if 15+ employees
+
 ---
 
 ## Critical Success Factors
 
-### 1. Start With Legal Foundation
-- Register LLC immediately
-- Implement CIIA/PIIA before any work
-- Privacy Policy and ToS before users
+### 1. Start With Legal Foundation (Australia)
+- Register Pty Ltd before hiring or raising funds
+- Implement CIIA/PIIA before any work begins (employees and contractors)
+- Privacy Policy and ToS before collecting user data
+- DPA before processing B2B customer data
+- Contractor Agreements before engaging contractors
 
 ### 2. Security From Day One
 - Enable all free security tools (Dependabot, etc.)
@@ -901,18 +1333,57 @@ Compliance management systems demonstrate your commitment to security, privacy, 
 
 Building a comprehensive business operating system is an iterative process. Start with the essentials:
 
-1. **Legal foundation** (LLC, bank account, CIIA, Privacy Policy, ToS)
-2. **Security basics** (enable all free security tools)
-3. **Core infrastructure** (appropriate to your scale)
-4. **Essential tools** (source control, project management, communication)
-5. **Documentation habits** (policies, procedures, decisions)
+### For Australian Startups:
+
+1. **Legal foundation**
+   - Register Pty Ltd (before hiring or funding)
+   - Open business bank account (Up, Judo, CommBank, or Airwallex)
+   - Implement CIIA/PIIA before any work begins
+   - Draft Privacy Policy and ToS before collecting data
+   - Set up Xero or ERPNext for accounting
+   - Register for GST (if >$75k revenue or voluntary)
+
+2. **Security basics**
+   - Enable all free security tools (Dependabot, GitGuardian, Snyk)
+   - Implement proper access controls
+   - MFA everywhere
+
+3. **Observability from day one**
+   - Structured logging (Loki)
+   - Metrics (Prometheus + Grafana)
+   - Correlation IDs across services
+
+4. **Core infrastructure** (appropriate to your scale)
+   - Pre-Seed: Docker Compose on VPS
+   - Seed: Docker/Proxmox with proper environments
+   - Series A+: Kubernetes
+
+5. **Essential tools**
+   - GitHub (source control)
+   - Jira or Linear (project management)
+   - Xero or ERPNext (accounting)
+   - n8n (automation)
+
+6. **Documentation habits**
+   - Policies, procedures, decisions
+   - Employee handbook
+   - Contractor agreements
 
 Then build systematically toward mature compliance and management systems as you grow. The key is to start with good foundations and iterate continuously.
 
-Remember: Your business operating system should enable your team to work efficiently, securely, and in compliance with regulations—without creating unnecessary overhead. Choose tools and processes that scale with your business.
+### Raising US Venture Capital?
+
+If you're planning to raise from US VCs, consult a startup lawyer familiar with AU→US flips **before** your first fundraising round. You'll likely need to establish a Delaware C-Corp holding structure, which costs $5,000-20,000 in legal fees but is standard for US venture-backed companies.
+
+### Remember
+
+Your business operating system should enable your team to work efficiently, securely, and in compliance with Australian regulations—without creating unnecessary overhead. Choose tools and processes that scale with your business.
+
+**Don't over-engineer**: Start simple (Docker Compose, Xero, GitHub), scale smartly (Kubernetes, ERPNext, full observability stack) only when needed.
 
 ---
 
-**Document Version**: 1.0
-**Last Updated**: 2025-11-16
-**Maintained By**: Your Organization
+**Document Version**: 2.0 (Australian Edition)
+**Last Updated**: 2025-11-17
+**Target Audience**: Australian Startups
+**Maintained By**: Community
